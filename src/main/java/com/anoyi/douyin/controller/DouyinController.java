@@ -4,6 +4,7 @@ import com.anoyi.douyin.bean.DyUserVO;
 import com.anoyi.douyin.entity.DyAweme;
 import com.anoyi.douyin.service.DouyinService;
 import lombok.AllArgsConstructor;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,7 +24,11 @@ public class DouyinController {
     public DyAweme videos(@PathVariable("id") String id,
                           @PathVariable("tk") String tk,
                           @RequestParam(value = "cursor", defaultValue = "0") String cursor){
-        return douyinService.videoList(id, tk, cursor);
+        DyAweme videos = douyinService.videoList(id, tk, cursor);
+        if (CollectionUtils.isEmpty(videos.getAweme_list())){
+            videos = douyinService.videoList(id, tk, cursor);
+        }
+        return videos;
     }
 
 }
