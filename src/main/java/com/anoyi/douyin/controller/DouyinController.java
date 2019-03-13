@@ -25,7 +25,7 @@ public class DouyinController {
                           @PathVariable("tk") String tk,
                           @RequestParam(value = "cursor", defaultValue = "0") String cursor){
         DyAweme videos = douyinService.videoList(id, tk, cursor);
-        if (CollectionUtils.isEmpty(videos.getAweme_list())){
+        while (CollectionUtils.isEmpty(videos.getAweme_list())){
             videos = douyinService.videoList(id, tk, cursor);
         }
         return videos;
