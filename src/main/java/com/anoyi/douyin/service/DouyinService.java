@@ -79,6 +79,8 @@ public class DouyinService {
             dyUser.getFollowInfo().put("follower", follower);
             String likeNum = document.select("span.liked-num.block span.num").text();
             dyUser.getFollowInfo().put("likeNum", likeNum);
+            DyAweme videos = videoList(dyId, tk, "0");
+            dyUser.setVideos(videos);
             return dyUser;
         } catch (IOException e) {
             e.printStackTrace();
