@@ -12,6 +12,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -33,9 +34,20 @@ public class DouyinService {
     private final RpcNodeDyService rpcNodeDyService;
 
     /**
-     * 获取抖音用户视频列表
+     * 确保接口返回结果
      */
     public DyAweme videoList(String dyId, String dytk, String cursor) {
+        DyAweme videos = getVideoList(dyId, dytk, cursor);
+        while (videos.getHas_more() == 1 && CollectionUtils.isEmpty(videos.getAweme_list())){
+            videos = getVideoList(dyId, dytk, cursor);
+        }
+        return videos;
+    }
+
+    /**
+     * 获取抖音用户视频列表
+     */
+    private DyAweme getVideoList(String dyId, String dytk, String cursor){
         String signature = rpcNodeDyService.generateSignature(dyId);
         String api = String.format(VIDEO_LIST_API, dyId, cursor, signature, dytk);
         try {

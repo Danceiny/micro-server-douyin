@@ -16,19 +16,15 @@ public class DouyinController {
     private final DouyinService douyinService;
 
     @GetMapping("/user/{id}")
-    public DyUserVO user(@PathVariable("id") String id){
+    public DyUserVO user(@PathVariable("id") String id) {
         return douyinService.getDyUser(id);
     }
 
     @GetMapping("/videos/{id}/{tk}")
     public DyAweme videos(@PathVariable("id") String id,
                           @PathVariable("tk") String tk,
-                          @RequestParam(value = "cursor", defaultValue = "0") String cursor){
-        DyAweme videos = douyinService.videoList(id, tk, cursor);
-        while (CollectionUtils.isEmpty(videos.getAweme_list())){
-            videos = douyinService.videoList(id, tk, cursor);
-        }
-        return videos;
+                          @RequestParam(value = "cursor", defaultValue = "0") String cursor) {
+        return douyinService.videoList(id, tk, cursor);
     }
 
 }
