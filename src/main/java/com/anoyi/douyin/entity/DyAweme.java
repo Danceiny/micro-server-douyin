@@ -25,6 +25,7 @@ public class DyAweme {
         private Statistics statistics;
         private List<TextExtra> text_extra;
         private Video video;
+        private String desc;
         @Data
         private class Statistics{
             private String digg_count;
