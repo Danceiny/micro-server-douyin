@@ -20,12 +20,12 @@ public class DyAweme {
     @Data
     private class Aweme{
         private String aweme_id;
+        private String desc;
         private int aweme_type;
         private int media_type;
         private Statistics statistics;
         private List<TextExtra> text_extra;
         private Video video;
-        private String desc;
         @Data
         private class Statistics{
             private String digg_count;
