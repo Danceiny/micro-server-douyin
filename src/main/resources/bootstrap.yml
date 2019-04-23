@@ -1,0 +1,24 @@
+# 配置中心：SCCA 地址 + SCCA 配置项 spring.cloud.config.server.prefix
+#spring.cloud.config.uri=https://conf.anoyi.com/scca-config-server
+spring:
+  application:
+    name: micro-server-douyin
+  cloud:
+    config:
+      uri:
+      profile: dev
+      label: master
+
+
+grpc:
+  server:
+    port: 8082
+    address: '0.0.0.0'
+
+  client:
+    GLOBAL:
+      enableKeepAlive: true
+
+    sign-service:
+      address: 'static://localhost:8081'
+      negotiationType: 'PLAINTEXT'

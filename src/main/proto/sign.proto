@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option java_package = "com.anoyi.douyin.rpc";
+option java_outer_classname = "RpcDyService";
+option java_multiple_files = true;
+
+package sign;
+
+// 定义通用的 Grpc 服务
+service SignService {
+    // 处理请求
+    rpc webSign (WebSignRequest) returns (WebSignResponse);
+    rpc appSign (AppSignRequest) returns (AppSignResponse);
+}
+
+message WebSignRequest {
+    string uid = 1;
+}
+
+message WebSignResponse {
+    string signature = 1;
+}
+
+message AppSignRequest {
+    string url = 1;
+}
+
+message AppSignResponse {
+    string url = 1;
+}
